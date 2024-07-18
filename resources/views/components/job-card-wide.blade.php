@@ -2,7 +2,6 @@
 
 
 <x-panel class="flex  gap-x-6 mb-4">
-    <a href="{{ $job->url }}">
         <div>
             <x-employer-logo :$job />
         </div>
@@ -21,9 +20,24 @@
             @foreach ($job->tags as $tag)
             <x-tag :$tag />
             @endforeach
-
         </div>
 
-    </a>
+        @auth
+                @if (Auth::user()->employer->name === $job->employer->name)
+                <div class="">
+                    <a href="" class="bg-blue-800 py-1 px-2 rounded text-2xs">^</a>
+                    <form action="/job/destroy/{{ $job->employer->name }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+
+                        <button class="bg-red-800 py-1 px-2 rounded text-2xs mt-1">X</button>
+                    </form>
+                    {{-- <a href="" class="bg-red-800 py-2 px-3 rounded text-2xs">X</a> --}}
+
+                </div>
+            @endif
+            @endauth
+
+
 
 </x-panel>
