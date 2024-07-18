@@ -15,6 +15,9 @@ Route::get('/search',SearchController::class);
 Route::get('/tags/{tag:name}',TagController::class);
 
 Route::middleware('auth')->group(function (){
+    Route::get('/job/edit/{job:name}',[JobController::class,'edit']);
+    Route::patch('/job/update/{job:name}',[JobController::class,'update']);
+    Route::delete('/job/destroy/{job:name}',[JobController::class,'delete']);
 
     Route::delete('/logout',[AuthController::class,'destroy']);
 });
