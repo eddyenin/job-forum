@@ -20,6 +20,7 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::latest()->get()->groupBy('featured');
+        // $tag = Tag::where()
 
         return view('jobs.index',[
             'jobs'=>$jobs[0],
@@ -75,7 +76,10 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+       //dd($job);
+        $jo = $job->where('title',$job->title)->first();
+        //dd($jo);
+        return view('jobs.edit',compact('jo'));
     }
 
     /**

@@ -25,8 +25,8 @@
         @auth
                 @if (Auth::user()->employer->name === $job->employer->name)
                 <div class="">
-                    <a href="" class="bg-blue-800 py-1 px-2 rounded text-2xs">^</a>
-                    <form action="/job/destroy/{{ $job->employer->name }}" method="POST">
+                    <a href="{{ url('/job/edit/'.$job->title)  }}" class="bg-blue-800 py-1 px-2 rounded text-2xs">^</a>
+                    <form action="{{ url('job.delete'.'/'.$job->employer->name )  }}" method="POST">
                         @csrf
                         @method('PATCH')
 
